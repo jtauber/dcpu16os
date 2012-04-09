@@ -72,6 +72,22 @@ SET PC, start
     ADD [0x1000], 1
     SET PC, newline
 
+:scroll
+    SET J, 1
+    SET Z, [0x1001]
+    :scroll_loop
+    IFE J, [0x1002]
+        SET PC, POP ; return
+    SET I, J
+    MUL I, [0x1001]
+    SET X, 0x8000
+    ADD X, I
+    SET Y, X
+    SUB Y, [0x1001]
+    JSR mem_copy
+    ADD J, 1
+    SET PC, scroll_loop
+
 
 ;; start
 
