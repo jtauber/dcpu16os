@@ -11,6 +11,19 @@ SET PC, start
 
 :banner DAT "DCPU-16 Operating System", 0
 
+
+:mem_copy                           ; copy [X:X+Z+1] -> [Y:Y+Z+1]
+    SET I, 0
+:mem_copy_loop
+    IFE I, Z
+        SET PC, POP ; return
+    SET [Y], [X]
+    ADD X, 1
+    ADD Y, 1
+    ADD I, 1
+    SET PC, mem_copy_loop
+
+
 :clear_screen
     SET I, 0x8000
     SET Z, [0x1001]
