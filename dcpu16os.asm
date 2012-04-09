@@ -9,8 +9,8 @@
 
 SET PC, start
 
-:banner DAT "DCPU-16 Operating System", 0
 
+;; utilities
 
 :mem_copy                           ; copy [X:X+Z+1] -> [Y:Y+Z+1]
     SET I, 0
@@ -23,6 +23,8 @@ SET PC, start
     ADD I, 1
     SET PC, mem_copy_loop
 
+
+;; video
 
 :clear_screen
     SET I, 0x8000
@@ -69,6 +71,11 @@ SET PC, start
     SET [0x8000 + Y], 0x20
     ADD [0x1000], 1
     SET PC, newline
+
+
+;; start
+
+:banner DAT "DCPU-16 Operating System", 0
 
 :start
     SET [0x1001], 80                    ; terminal width
